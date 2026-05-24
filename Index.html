@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Twins Online Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d4ff; 
+            --bg: #0a0a0c;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .container { padding: 20px; max-width: 600px; margin: auto; }
+
+        header { text-align: center; padding: 40px 0; }
+        header h1 { font-size: 2rem; color: var(--primary); }
+
+        #services-grid { display: grid; gap: 15px; }
+
+        .price { font-weight: bold; color: var(--primary); display: block; margin-top: 10px; margin-bottom: 15px; }
+
+        form { display: flex; flex-direction: column; gap: 10px; }
+        
+        input, textarea, .service-btn, button {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+
+        button {
+            background: var(--primary);
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        button:active { transform: scale(0.98); }
+
+        .service-btn {
+            display: block;
+            background: #25D366;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: none;
+            transition: transform 0.2s ease;
+        }
+
+        .service-btn:active { transform: scale(0.95); }
+
+        .gallery-img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Gemini Twins</h1>
+            <p>Digital Agency & AI Productions</p>
+        </header>
+
+        <section id="gallery">
+            <h2 style="margin-bottom: 15px;">Latest Creations</h2>
+            <div class="glass-card">
+                <img src="stability.png" alt="AI Production" class="gallery-img">
+                <p>Township Hustle: An AI Cinematic Experience</p>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2 style="margin-bottom: 15px;">Professional Services</h2>
+            <div id="services-grid"></div>
+        </section>
+
+        <section id="contact" style="margin-top: 40px;">
+            <h2 style="margin-bottom: 15px;">Get in Touch</h2>
+            <div class="glass-card">
+                <form name="contact" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="contact" />
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="4" placeholder="How can I help?"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6;">
+            © 2026 Gemini Twins Online Services. All Rights Reserved.
+        </footer>
+    </div>
+
+    <script>
+        const myServices = [
+            { name: "Professional CV Revamp", price: "R350", desc: "Premium layout & ATS optimization." },
+            { name: "Google Maps Business Listing", price: "R350", desc: "Get your business found locally." },
+            { name: "AI Film Production", price: "Custom", desc: "High-end cinematic shorts & vlogs." }
+        ];
+
+        const grid = document.getElementById('services-grid');
+
+        myServices.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'glass-card';
+            const encodedText = encodeURIComponent(`Hello Gemini Twins, I am interested in your service: ${item.name}.`);
+            const whatsappUrl = `https://wa.me/27679867629?text=${encodedText}`;
+
+            card.innerHTML = `
+                <h3>${item.name}</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">${item.desc}</p>
+                <span class="price">${item.price}</span>
+                <a href="${whatsappUrl}" class="service-btn">Order Service</a>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+
+    </body>
+</html>
